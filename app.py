@@ -284,7 +284,9 @@ def get_video_html(bvh_path, fbx_path):
         <b>FBX Download</b>
     </a>
     </div>
-    <iframe src='{fbx_url}' width='100%' height='1000px'></iframe>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+    <iframe src='{fbx_url}' width='80%' height='1000px'></iframe>
+    </div>
     """
     return video_html
 
@@ -508,5 +510,5 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
     clear.click(fn=clear_videos, 
                 outputs=videos + [text, step, up2motion_len, motion_len, dataset, seed, cfg, top_p, top_k])
 
-
+demo.queue(default_concurrency_limit=1)
 demo.launch()
