@@ -1,0 +1,4 @@
+*.text
+*.zip
+__pycache__
+checkpoints/
