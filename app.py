@@ -285,7 +285,7 @@ def get_video_html(bvh_path, fbx_path):
     </a>
     </div>
     <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
-        <iframe src='{fbx_url}' width='80%' height='800px'></iframe>
+        <iframe src='{fbx_url}' width='80%' height='500px'></iframe>
     </div>
     """
     return video_html
