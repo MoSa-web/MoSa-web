@@ -210,7 +210,7 @@ def motionx_inv_transform(data):
 
 converter = Joint2BVHConvertor()
 if IS_HF_SPACE:
-    cached_dir = './cached'
+    cached_dir = '/tmp/gradio'
 else:
     cached_dir = static_source_proj_path + 'cached'
 
@@ -270,7 +270,7 @@ def get_video_html(bvh_path, fbx_path):
     if IS_HF_SPACE:
         bvh_url = f'file/{bvh_path}'
         fbx_download_url = f'file/{fbx_path}'
-        fbx_url = f'https://eanson023-static-source.hf.space/app.html?fbx=https://eanson023-test.hf.space/file/{fbx_path}'
+        fbx_url = f'https://eanson023-static-source.hf.space/app.html?fbx=https://eanson023-test.hf.space/{fbx_download_url}'
     else:
         bvh_url = f'http://localhost:5000/{bvh_path[len(static_source_proj_path):]}'
         fbx_download_url = f'http://localhost:5000/{fbx_path[len(static_source_proj_path):]}'
