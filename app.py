@@ -40,7 +40,7 @@ WEBSITE = """
 WEBSITE_bottom = """
 <div class="embed_hidden">
 <p>
-The entire generation process will take approximately 30 seconds (the majority is consumed by the retarget operation). 
+The entire generation process will take approximately 60 seconds (the majority is consumed by the retarget operation). 
 </p>
 </div>
 """
@@ -212,7 +212,7 @@ converter = Joint2BVHConvertor()
 if IS_HF_SPACE:
     cached_dir = './cached'
 else:
-    cached_dir = static_source_proj_path+'cached'
+    cached_dir = static_source_proj_path + 'cached'
 
 def clear_cache_on_startup(cached_dir):
     if os.path.exists(cached_dir):
@@ -268,8 +268,9 @@ def get_video_html(bvh_path, fbx_path):
     print(bvh_path)
     print(fbx_path)
     if IS_HF_SPACE:
-        bvh_url = fbx_download_url = f'file/{bvh_path}'
-        fbx_url = f'https://eanson023-static-source.hf.space/app.html?fbx={fbx_path}'
+        bvh_url = f'file/{bvh_path}'
+        fbx_download_url = f'file/{fbx_path}'
+        fbx_url = f'https://eanson023-static-source.hf.space/app.html?fbx=https://eanson023-test.hf.space/file/{fbx_path}'
     else:
         bvh_url = f'http://localhost:5000/{bvh_path[len(static_source_proj_path):]}'
         fbx_download_url = f'http://localhost:5000/{fbx_path[len(static_source_proj_path):]}'
