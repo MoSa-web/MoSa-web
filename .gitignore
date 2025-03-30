@@ -1,4 +1,4 @@
 *.text
-*.zip
+checkpoints.zip
 __pycache__
 checkpoints/
