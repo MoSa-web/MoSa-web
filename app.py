@@ -268,8 +268,8 @@ def get_video_html(bvh_path, fbx_path):
     print(bvh_path)
     print(fbx_path)
     if IS_HF_SPACE:
-        bvh_url = f'file/{bvh_path}'
-        fbx_download_url = f'file/{fbx_path}'
+        bvh_url = f'gradio_api/file={bvh_path}'
+        fbx_download_url = f'gradio_api/file={fbx_path}'
         fbx_url = f'https://eanson023-static-source.hf.space/app.html?fbx=https://eanson023-test.hf.space/{fbx_download_url}'
     else:
         bvh_url = f'http://localhost:5000/{bvh_path[len(static_source_proj_path):]}'
