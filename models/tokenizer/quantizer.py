@@ -14,8 +14,8 @@ class QuantizeInterpolatedEMAReset(nn.Module):
         
     def reset_codebook(self):
         self.register_buffer('initted', torch.Tensor([False]))
-        self.register_buffer('code_sum', torch.zeros(self.V, self.C).cuda())
-        self.register_buffer('codebook', torch.zeros(self.V, self.C).cuda())
+        self.register_buffer('code_sum', torch.zeros(self.V, self.C))
+        self.register_buffer('codebook', torch.zeros(self.V, self.C))
         self.register_buffer('code_count', torch.ones(self.V, device=self.codebook.device))
 
     def _tile(self, x):
