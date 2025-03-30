@@ -4,7 +4,7 @@ chumpy
 einops==0.6.1
 ffmpy==0.3.1
 ftfy==6.1.1
-gdown==4.7.1
+gdown
 grpcio==1.54.2
 h11==0.14.0
 importlib-metadata==5.0.0
