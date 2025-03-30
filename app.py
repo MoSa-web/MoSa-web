@@ -93,7 +93,7 @@ if IS_HF_SPACE:
     if not os.path.exists("/data/checkpoints/t2m"):
         os.system("bash prepare/download_models_demo.sh")
     if not os.path.exists("checkpoints/t2m"):
-        os.system("ln -s /data/checkpoints checkpoints")
+        os.system("ln -s /data/checkpoints/checkpoints checkpoints")
     if not os.path.exists("/data/stats"):
         os.makedirs("/data/stats")
         with open(prompt_path, 'w') as f:
