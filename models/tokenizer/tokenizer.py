@@ -46,7 +46,7 @@ class SQVAE(nn.Module):
         self.reset_slot()
     
     def reset_slot(self):
-        self.virtual_slot = nn.Parameter(torch.zeros(self.slot_num, self.input_width, device="cuda"), requires_grad=False)
+        self.virtual_slot = nn.Parameter(torch.zeros(self.slot_num, self.input_width), requires_grad=False)
         self.register_buffer('initted', torch.Tensor([False]))
     
     def _tile(self, x, x_lens):

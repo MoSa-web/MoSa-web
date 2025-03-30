@@ -77,7 +77,7 @@ class Transformer(nn.Module):
         self.scales = scales
         self.first_t = self.scales[0]
         self.num_stages_minus1 = len(self.scales)-1
-        self.rng = torch.Generator('cuda')
+        self.rng = torch.Generator()
 
         # 1. input (word) embedding
         self.input_process = nn.Linear(self.code_dim, self.latent_dim)
