@@ -291,7 +291,7 @@ def get_video_html(bvh_path, fbx_path):
     """
     return video_html
 
-def get_video_html_mp4(bvh_path, mp4_path, width=600, height=600):
+def get_video_html_mp4(bvh_path, mp4_path, width=400, height=400):
     # class="wrap default svelte-gjihhp hide"
     # <div class="contour_video" style="position: absolute; padding: 10px;">
     # width="{width}" height="{height}"
