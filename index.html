@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="assets/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="assets/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>MoSa: Motion Generation with Scalable Autoregressive Modeling</title>
+  <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/bulma.min.css">
+  <link rel="stylesheet" href="assets/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="assets/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="assets/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="assets/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="assets/js/fontawesome.all.min.js"></script>
+  <script src="assets/js/bulma-carousel.min.js"></script>
+  <script src="assets/js/bulma-slider.min.js"></script>
+  <script src="assets/js/index.js"></script>
+</head>
+
+<style>
+  .hover-effect {
+    display: inline-block;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+  }
+  
+  .hover-effect img {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    border: 2px solid transparent;
+    width: 600px;
+  }
+  
+  .hover-effect:hover {
+    transform: translateY(-2px);
+  }
+  
+  .hover-effect:hover img {
+    transform: scale(1.05);
+    opacity: 0.9;
+    cursor: pointer;
+    border: 3px solid #ce67e5;
+    box-shadow: 0 4px 8px rgba(219, 52, 177, 0.862);
+  }
+</style>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">MoSa: Motion Generation with Scalable Autoregressive Modeling</h1>
+            <div class="is-size-5 publication-authors">
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">Anonymous authors</a><sup>*</sup></span>
+              <!-- <span class="author-block">
+                <a href="FIRST AUTHOR PERSONAL LINK" target="_blank">First Author</a><sup>*</sup>,</span>
+              <span class="author-block">
+                <a href="SECOND AUTHOR PERSONAL LINK" target="_blank">Second Author</a><sup>*</sup>,</span>
+              <span class="author-block">
+                  <a href="THIRD AUTHOR PERSONAL LINK" target="_blank">Third Author</a></span> -->
+            </div>
+
+                  <div class="is-size-5 publication-authors">
+                    <!-- <span class="author-block">Institution Name<br>Conferance name and year</span> -->
+                    <span class="author-block">Submitted to ICCV 2025</span>
+                    <!-- <span class="eql-cntrb"><small><br><sup>*</sup>Indicates Equal Contribution</small></span> -->
+                  </div>
+
+                  <div class="column has-text-centered">
+                    <div class="publication-links">
+                         <!-- Arxiv PDF link -->
+                      <span class="link-block">
+                        <a href="https://openreview.net/forum?id=9irQFyBqnp" target="_blank"
+                        class="external-link button is-normal is-rounded is-dark">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span>
+                  
+                  <span class="link-block">
+                    <a href="https://huggingface.co/spaces/MoSa-web/MoSa" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-rocket"></i>
+                    </span>
+                    <span>Program</span>
+                    </a>
+                  </span>
+                  <!-- Github link -->
+                  <span class="link-block">
+                    <a href="https://github.com/YOUR REPO HERE" target="_blank"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code (Coming soon)</span>
+                  </a>
+                </span>
+
+                <!-- ArXiv abstract Link -->
+                <!-- <span class="link-block">
+                  <a href="https://arxiv.org/abs/<ARXIV PAPER ID>" target="_blank"
+                  class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                    <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                  </a>
+                </span> -->
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered">
+      <img src = "./assets/images/inference_example.jpg" height="80%"></img><br>
+    </div>
+    <h2 class="subtitle">
+      Our MoSa demonstrates a generation process from coarse to fine. The <a href="https://huggingface.co/spaces/MoSa-web/MoSa" target="_blank"
+      class="external-link">interactive program</a> has been released, and you can adjust the "Scales" slider to intuitively experience this process! 🔥🔥🔥  
+    </h2>
+    <div class="hero-body has-text-centered">
+      <a href="https://huggingface.co/spaces/MoSa-web/MoSa" target="_blank" class="hover-effect">
+        <img src="./assets/images/program.png" height="80%" alt="Program Image">
+      </a>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduce MoSa, a novel hierarchical motion generation framework for text-driven 3D human motion generation that enhances the Vector Quantization-guided Generative Transformers (VQ-GT) paradigm through a coarse-to-fine scalable generation process. In MoSa, we propose a multi-scale token preservation strategy integrated into an improved hierarchical residual vector quantization variational autoencoder (RQ-VAE), which helps preserve intermediate-scale motion tokens. Moreover, a scalable autoregressive (SAR) transformer is employed to process motion sequences progressively, ensuring consistency between encoding and generation. Unlike traditional autoregressive models that predict one token at a time, SAR supports parallel multi-token prediction at varying scales, improving inference efficiency. Extensive experiments demonstrate that MoSa achieves state-of-the-art motion fidelity while improving the inference speed by 27% over MoMask. In particular, on the Motion-X dataset, MoSa achieves an FID of 0.18 (versus 0.20 of MoMask), which demonstrates superior generative quality and efficiency.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+<section class="section is-light is-small">
+  <div class="container is-max-desktop">
+    <center><h2 class="title is-3">Framework Overview</h2></center>
+    <div class="hero-body">
+      <a href="./assets/images/model.jpg"><img src = "./assets/images/model.jpg" height="100%"></img></href></a><br>
+    </div>
+  </div>
+    <!--/ Abstract. -->
+
+</section>
+<!-- Image carousel -->
+<section class="hero is-light is-small">
+  <center><h2 class="title is-3">Gallery of Generation</h2></center>
+  <h2 class="has-text-centered">The video is currently being rendered and will be released next week. 🫡</h2>
+  <div class="hero-body">
+    <div class="container">
+        <div id="results-carousel" class="carousel results-carousel">
+            <!-- 项目1 -->
+            <div class="column">
+              <h2 class="subtitle has-text-centered">
+                  The athlete sprinted forward, leaped into the air, and gracefully executed a mid-air somersault before landing firmly on both feet.
+              </h2>
+                <div class="has-text-centered">
+                    <img src="assets/images/sample1.png" alt="MY ALT TEXT" class="image" style="max-width: 500px; display: block; margin: 0 auto;">
+                </div>
+            </div>
+            
+            <!-- 项目2 -->
+            <div class="column">
+              <h2 class="subtitle has-text-centered">
+                  A boy is swimming the butterfly stroke.
+              </h2>
+                <div class="has-text-centered">
+                    <img src="assets/images/sample2.png" alt="MY ALT TEXT" class="image" style="max-width: 500px; display: block; margin: 0 auto;">
+                </div>
+            </div>
+            
+            <!-- 项目3 -->
+            <div class="column">
+              <h2 class="subtitle has-text-centered">
+                  a man with outstretched arms drops them to his side, then start walking and places his right hand on top of two objects as he walks by.
+              </h2>
+                <div class="has-text-centered">
+                    <img src="assets/images/sample3.png" alt="MY ALT TEXT" class="image" style="max-width: 500px; display: block; margin: 0 auto;">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</section>
+<!-- End image carousel -->
+
+<!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code>BibTex Code Here</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+  <footer class="footer">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the source code of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Statcounter tracking code -->
+  
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+    <!-- End of Statcounter Code -->
+
+  </body>
+  </html>

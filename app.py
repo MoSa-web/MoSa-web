@@ -432,7 +432,7 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
                         ["Joint", "Charactor"],
                         label="Visualization type",
                         value="Joint",
-                        info="Sorry, bro. The retargeting of the Character is slow and unstable and undergoing optimization, please wating.",
+                        info="Sorry, bro. The retargeting of the Character is slow and unstable. Undergoing optimization, please wait.",
                         interactive=False
                     )
                 
