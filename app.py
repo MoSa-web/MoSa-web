@@ -80,7 +80,6 @@ CSS = """
     border-color: #000000;
     border-radius: var(--block-radius);
     background: var(--block-background-fill);
-    width: 25%;
     line-height: var(--line-sm);
 }
 }
@@ -292,7 +291,7 @@ def get_video_html(bvh_path, fbx_path):
     """
     return video_html
 
-def get_video_html_mp4(bvh_path, mp4_path, width=1000, height=1000):
+def get_video_html_mp4(bvh_path, mp4_path, width=600, height=600):
     # class="wrap default svelte-gjihhp hide"
     # <div class="contour_video" style="position: absolute; padding: 10px;">
     # width="{width}" height="{height}"
@@ -433,7 +432,7 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
                         ["Joint", "Charactor"],
                         label="Visualization type",
                         value="Joint",
-                        info="Sorry, bro. The retargeting of the Character is slow and unstable and undergoing optimization",
+                        info="Sorry, bro. The retargeting of the Character is slow and unstable and undergoing optimization, please wating.",
                         interactive=False
                     )
                 
