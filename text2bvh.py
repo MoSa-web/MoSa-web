@@ -113,7 +113,7 @@ def text2bvh(t2m_transformer, vq_model, converter, cached_dir, uid, text, step, 
             bvh_path = pjoin(animation_path, "sample_repeat%d.bvh" % (r))
             _, joint = converter.convert(joint, filename=bvh_path, iterations=100, foot_ik=False)
 
-        return bvh_path, len(joint_data)
+        return bvh_path, joint, len(joint_data)
 
 
 

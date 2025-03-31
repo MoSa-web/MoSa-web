@@ -14,6 +14,8 @@ import shutil
 
 from options.eval_option import EvalT2MOptions
 from utils.get_opt import get_opt
+from utils.plot_script import plot_3d_motion
+from utils.paramUtil import t2m_kinematic_chain
 
 from visualization.joints2bvh import Joint2BVHConvertor
 
@@ -290,8 +292,34 @@ def get_video_html(bvh_path, fbx_path):
     """
     return video_html
 
+def get_video_html_mp4(bvh_path, mp4_path, width=1000, height=1000):
+    # class="wrap default svelte-gjihhp hide"
+    # <div class="contour_video" style="position: absolute; padding: 10px;">
+    # width="{width}" height="{height}"
+    print(bvh_path)
+    print(mp4_path)
+    if IS_HF_SPACE:
+        bvh_url = f'gradio_api/file={bvh_path}'
+        mp4_url = f'gradio_api/file={mp4_path}'
+    else:
+        bvh_url = f'http://localhost:5000/{bvh_path[len(static_source_proj_path):]}'
+        mp4_url = f'http://localhost:5000/{mp4_path[len(static_source_proj_path):]}'
+    video_html = f"""
+    <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
+    <a href="{bvh_url}" download="sample.bvh" style="padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
+        <b>BVH Download</b>
+    </a>
+    </div>
+    <video class="generate_video" width="{width}" height="{height}" style="center" preload="auto" muted playsinline onpause="this.load()"
+    autoplay loop disablepictureinpicture id="0">
+    <source src="{mp4_url}" type="video/mp4">
+    Your browser does not support the video tag.
+    </video>
+    """
+    return video_html
 
-def generate_component(generate_function, retarget_finction, text, role, step, up2motion_len, motion_len, dataset, seed, cfg, topp, topk):
+
+def generate_component(generate_function, retarget_finction, text, role, step, up2motion_len, motion_len, dataset, visual_type, seed, cfg, topp, topk):
     if text == DEFAULT_TEXT or text == "" or text is None:
         return [None for _ in range(1)]
     uid = uuid.uuid1()
@@ -314,10 +342,15 @@ def generate_component(generate_function, retarget_finction, text, role, step, u
     else:
         raise NotImplementedError("")
     step = step-1
-    bvh_path, motion_len = generate_function(transformer, vq_model, converter, cached_dir, uid, text, step, up2motion_len, inv_transform, motion_length=motion_len, seed=seed, cond_scale=cfg, top_k=topk, top_p=topp)
-    fbx_path = bvh_path.replace('.bvh', '.fbx')
-    retarget_finction(bvh_path, role, fbx_path, motion_len)
-    return [get_video_html(bvh_path, fbx_path)]
+    bvh_path, joint, motion_len = generate_function(transformer, vq_model, converter, cached_dir, uid, text, step, up2motion_len, inv_transform, motion_length=motion_len, seed=seed, cond_scale=cfg, top_k=topk, top_p=topp)
+    if visual_type == "Joint":
+        mp4_path = bvh_path.replace('.bvh', '.mp4')
+        plot_3d_motion(mp4_path, t2m_kinematic_chain, joint, text, fps=20)
+        return [get_video_html_mp4(bvh_path, mp4_path)]
+    else:
+        fbx_path = bvh_path.replace('.bvh', '.fbx')
+        retarget_finction(bvh_path, role, fbx_path, motion_len)
+        return [get_video_html(bvh_path, fbx_path)]
 
 
 # LOADING
@@ -380,21 +413,28 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
                                             scale=3, interactive=True,
                                             info="Upsampling to motion length")
             
-            with gr.Row():
-                with gr.Column(scale=1):
-                    motion_len = gr.Slider(
+            motion_len = gr.Slider(
                         1, 10,
                         show_label=True,
                         label="Motion length (<10s)",
                         value=10,
                         info="Specify the motion length.",
                     )
+            with gr.Row():
                 with gr.Column(scale=1):
                     dataset = gr.Radio(
                         ["HumanML3D", "Motion-X"],
                         label="Dataset",
                         value="HumanML3D",
                         info="The different pre-trained weights will be used.",
+                    )
+                with gr.Column(scale=1):
+                    visual_type = gr.Radio(
+                        ["Joint", "Charactor"],
+                        label="Visualization type",
+                        value="Joint",
+                        info="Sorry, bro. The retargeting of the Character is slow and unstable and undergoing optimization",
+                        interactive=False
                     )
                 
             with gr.Accordion("Advanced Settings", open=False):
@@ -461,7 +501,7 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
                 i += 1
                 video = gr.HTML()
                 videos.append(video)
-    gr.Markdown(WEBSITE_bottom)
+    # gr.Markdown(WEBSITE_bottom)
     # connect the examples to the output
     # a bit hacky
     examples.outputs = videos
@@ -477,17 +517,17 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
         show_progress=False,
         postprocess=False,
         queue=False,
-    ).then(fn=generate_and_show, inputs=examples.inputs + [selected_role, step, up2motion_len, motion_len, dataset, seed, cfg, top_p, top_k], outputs=videos)
+    ).then(fn=generate_and_show, inputs=examples.inputs + [selected_role, step, up2motion_len, motion_len, dataset, visual_type, seed, cfg, top_p, top_k], outputs=videos)
 
     
     gen_btn.click(
         fn=generate_and_show,
-        inputs=[text, selected_role, step, up2motion_len, motion_len, dataset, seed, cfg, top_p, top_k],
+        inputs=[text, selected_role, step, up2motion_len, motion_len, dataset, visual_type, seed, cfg, top_p, top_k],
         outputs=videos,
     )
     text.submit(
         fn=generate_and_show,
-        inputs=[text, selected_role, step, up2motion_len, motion_len, dataset, seed, cfg, top_p, top_k],
+        inputs=[text, selected_role, step, up2motion_len, motion_len, dataset, visual_type, seed, cfg, top_p, top_k],
         outputs=videos,
     )
 
@@ -500,6 +540,7 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
                 False,  # up2motion_len
                 10,  # motion_len
                 "HumanML3D",  # dataset
+                "Jint",
                 2025,  # seed
                 4.0,  # cfg
                 0.9,  # top_p
@@ -508,7 +549,7 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
         return [None for x in range(1)] + get_defaults(DEFAULT_TEXT)
 
     clear.click(fn=clear_videos, 
-                outputs=videos + [text, step, up2motion_len, motion_len, dataset, seed, cfg, top_p, top_k])
+                outputs=videos + [text, step, up2motion_len, motion_len, dataset, visual_type, seed, cfg, top_p, top_k])
 
 demo.queue(default_concurrency_limit=5)
 demo.launch()
