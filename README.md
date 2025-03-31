@@ -1,8 +1,8 @@
 ---
-title: Test
+title: MoSa
 emoji: 🌖
-colorFrom: indigo
-colorTo: pink
+colorFrom: green
+colorTo: green
 sdk: gradio
 sdk_version: 5.23.1
 app_file: app.py
