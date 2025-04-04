@@ -42,27 +42,35 @@ WEBSITE = """
 WEBSITE_bottom = """
 <div class="embed_hidden">
 <p>
-The entire generation process will take approximately 60 seconds (the majority is consumed by the retarget operation). 
+We use the <a href="https://github.com/nkeeline/Keemap-Blender-Rig-ReTargeting-Addon" target="_blank" rel="noopener">KeeMap</a> Blender plugin to complete the joint retargeting, and use <a href="https://github.com/BabylonJS/Babylon.js" target="_blank" rel="noopener">Babylon.js</a> for rendering. Thank them! 
 </p>
 </div>
 """
 
 EXAMPLES = [
    "A person is running on a treadmill.", "The person takes 4 steps backwards.", 
-   "A person jumps up and then lands.", "The person was pushed but did not fall.", 
+#    "A person jumps up and then lands.", 
+   "The person was pushed but did not fall.", 
    "The person does a salsa dance.", "A figure streches it hands and arms above its head.",
    "This person kicks with his right leg then jabs several times.",
    "A person stands for few seconds and picks up his arms and shakes them.",
    "A person walks in a clockwise circle and stops where he began.",
    "A man bends down and picks something up with his right hand.",
-   "A person walks with a limp, their left leg gets injured.",
+   "a person moves ahead a few steps quickly.",
+   "a person walks forward and is pushed forward.",
+   "this man is bent forward and walks slowly around.",
+#    "A person walks with a limp, their left leg gets injured.",
    "A person repeatedly blocks their face with their right arm.",
 #    "The person holds his left foot with his left hand, puts his right foot up and left hand up too.",
    "The person holds their left foot with their left hand, lifting both their left foot and left hand up.",
 #    "A person stands, crosses left leg in front of the right, lowering themselves until they are sitting, both hands on the floor before standing and uncrossing legs.",
    "The person stands, crosses their left leg in front of the right, lowers themselves until they are sitting with both hands on the floor, and then stands back up, uncrossing their legs.",
-   "The man walked forward, spun right on one foot and walked back to his original position.",
+   "a person brings up their right hand from their side to touch their nose, drops their arm back down, and takes two steps backwards.",
+#    "The man walked forward, spun right on one foot and walked back to his original position.",
    "A man is walking forward then steps over an object then continues walking forward.",
+   "a person dances in celebration, thrusting their arms in the air and moving side to side.",
+   "a person does a cartwheel and then walks in a circle to the right."
+
 ]
 
 # Show closest text in the training
@@ -262,20 +270,23 @@ def render_scene(bvh_path, fbx_choice, fbx_path, motion_length):
 
 
 # HTML component
-def get_video_html(bvh_path, fbx_path):
+def get_video_html(bvh_path, fbx_path, glb_path):
     # class="wrap default svelte-gjihhp hide"
     # <div class="contour_video" style="position: absolute; padding: 10px;">
     # width="{width}" height="{height}"
     print(bvh_path)
     print(fbx_path)
+    print(glb_path)
     if IS_HF_SPACE:
         bvh_url = f'gradio_api/file={bvh_path}'
         fbx_download_url = f'gradio_api/file={fbx_path}'
-        fbx_url = f'https://eanson023-static-source.hf.space/app.html?fbx=https://eanson023-test.hf.space/{fbx_download_url}'
+        glb_download_url = f'gradio_api/file={glb_path}'
+        glb_url = f'https://eanson023-static-source.hf.space/app.html?glb=https://eanson023-test.hf.space/{glb_download_url}'
     else:
         bvh_url = f'http://localhost:5000/{bvh_path[len(static_source_proj_path):]}'
         fbx_download_url = f'http://localhost:5000/{fbx_path[len(static_source_proj_path):]}'
-        fbx_url = f'http://localhost:5000/app.html?fbx={fbx_path[len(static_source_proj_path):]}'
+        glb_download_url = f'http://localhost:5000/{glb_path[len(static_source_proj_path):]}'
+        glb_url = f'http://localhost:5000/app.html?glb={glb_path[len(static_source_proj_path):]}'
     video_html = f"""
     <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
     <a href="{bvh_url}" download="sample.bvh" style="padding: 10px 20px; background: #4CAF50; color: white; text-decoration: none; border-radius: 5px;">
@@ -284,9 +295,12 @@ def get_video_html(bvh_path, fbx_path):
     <a href="{fbx_download_url}" download="sample.fbx" style="padding: 10px 20px; background: #2196F3; color: white; text-decoration: none; border-radius: 5px;">
         <b>FBX Download</b>
     </a>
+    <a href="{glb_download_url}" download="sample.fbx" style="padding: 10px 20px; background: #FF5722; color: white; text-decoration: none; border-radius: 5px;">
+        <b>GLB Download</b>
+    </a>
     </div>
     <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px;">
-        <iframe src='{fbx_url}' width='80%' height='500px'></iframe>
+        <iframe src='{glb_url}' width='80%' height='500px'></iframe>
     </div>
     """
     return video_html
@@ -348,8 +362,9 @@ def generate_component(generate_function, retarget_finction, text, role, step, u
         return [get_video_html_mp4(bvh_path, mp4_path)]
     else:
         fbx_path = bvh_path.replace('.bvh', '.fbx')
+        glb_path = bvh_path.replace('.bvh', '.glb')
         retarget_finction(bvh_path, role, fbx_path, motion_len)
-        return [get_video_html(bvh_path, fbx_path)]
+        return [get_video_html(bvh_path, fbx_path, glb_path)]
 
 
 # LOADING
@@ -432,8 +447,8 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
                         ["Joint", "Charactor"],
                         label="Visualization type",
                         value="Joint",
-                        info="Sorry, bro. The retargeting of the Character is slow and unstable. Undergoing optimization, please wait.",
-                        interactive=False
+                        info="The Character visualization will consume much time.",
+                        # interactive=False
                     )
                 
             with gr.Accordion("Advanced Settings", open=False):
@@ -500,7 +515,7 @@ with gr.Blocks(css=CSS, theme=theme) as demo:
                 i += 1
                 video = gr.HTML()
                 videos.append(video)
-    # gr.Markdown(WEBSITE_bottom)
+    gr.Markdown(WEBSITE_bottom)
     # connect the examples to the output
     # a bit hacky
     examples.outputs = videos
