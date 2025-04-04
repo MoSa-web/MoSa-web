@@ -281,7 +281,7 @@ def get_video_html(bvh_path, fbx_path, glb_path):
         bvh_url = f'gradio_api/file={bvh_path}'
         fbx_download_url = f'gradio_api/file={fbx_path}'
         glb_download_url = f'gradio_api/file={glb_path}'
-        glb_url = f'https://eanson023-static-source.hf.space/app.html?glb=https://eanson023-test.hf.space/{glb_download_url}'
+        glb_url = f'https://mosa-web-static-source.hf.space/app.html?glb=https://mosa-web-mosa.hf.space/{glb_download_url}'
     else:
         bvh_url = f'http://localhost:5000/{bvh_path[len(static_source_proj_path):]}'
         fbx_download_url = f'http://localhost:5000/{fbx_path[len(static_source_proj_path):]}'
