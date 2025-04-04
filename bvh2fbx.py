@@ -139,6 +139,15 @@ def bvh2fbx(bvh_path, fbx_choice, output_path, motion_length=196):
         bake_space_transform=True
     )
 
+    glb_output_path = output_path.replace('.fbx', '.glb')
+
+    bpy.ops.export_scene.gltf(
+        filepath=glb_output_path,
+        export_format='GLB',
+        use_selection=True,
+        export_apply=True
+    )
+
 if __name__ == "__main__":
     try:
         separator_idx = sys.argv.index("--")
