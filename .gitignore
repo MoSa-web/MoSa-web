@@ -2,3 +2,4 @@
 checkpoints.zip
 __pycache__
 checkpoints/
+.idea/

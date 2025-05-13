@@ -365,6 +365,254 @@
   </div>
 </section>
 
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <center><h2 class="title is-3">Apply in Motion Editing</h2></center><br>
+    <p> Benefiting from our scalable autoregressive modeling paradigm, motion generation at each scale can bidirectionally attend to intra-scale context and all preceding scale representations. Leveraging this design, we further explore a compelling application of our model—Motion Editing—which requires <b>no additional training</b>. Motion Editing encompasses a variety of sub-tasks, including motion inpainting, outpainting, prefix filling, suffix filling, and free-form motion completion. A visualization of the results is shown below, where input motion clips are highlighted in  <span style="color:rgb(230, 155, 169);">pink</span>, and the generated motions are depicted in <span style="color:red;">red</span>.</p>
+    <br>
+    <h2 class="title is-5">Motion Inpainitng (In-betweening)</h2>
+    <!-- (<span style="color:pink;">Pink</span>=Input, <span style="color:red;">Red</span>=Generation) -->
+    <p>Generating 50% motion in the middle based on the text <span style="color:red;">"person is working on their boxing form."</span> conditioned on first 25% and last 25% of motion of <span style="color:rgb(230, 155, 169);">"a person walks forward while being assisted by hand rails."</span></p>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <center><p><b>Source Motion</b></p></center>
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/inpainting1_source.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "person is working on their boxing form."</b></p></center>
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/inpainting1.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <br>
+    <p>Generating 50% motion in the middle based on the text <span style="color:red;">"a person jogs in place."</span> conditioned on first 25% and last 25% of motion of <span style="color:rgb(230, 155, 169);">"a person walks half a circle clockwise, then another half circle counter-clockwise."</span></p>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <center><p><b>Source Motion</b></p></center>
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/inpainting2_source.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "a person jogs in place."</b></p></center>
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/inpainting2.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <!-- ----------------------------------------- -->
+
+    <br>
+    <h2 class="title is-5">Motion Outpainitng</h2>
+    <!-- (<span style="color:pink;">Pink</span>=Input, <span style="color:red;">Red</span>=Generation) -->
+    <p>Generating 25% beginning motion and 25% end motion based on the text <span style="color:red;">"a person does a jumping jack."</span> conditioned on the 50% middle motion of <span style="color:rgb(230, 155, 169);">"a person appears to be playing tennins."</span></p>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <center><p><b>Source Motion</b></p></center>
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/outpainting1_source.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "a person does a jumping jack."</b></p></center>
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/outpainting1.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <br>
+    <p>Generating 25% beginning motion and 25% end motion based on the text <span style="color:red;">"someone is walking diagonally across the screen"</span> conditioned on the 50% middle motion of <span style="color:rgb(230, 155, 169);">"person is doing kicking motions with left leg."</span></p>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <center><p><b>Source Motion</b></p></center>
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/outpainting2_source.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "someone is walking diagonally across the screen"</b></p></center>
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/outpainting2.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <!-- ----------------------------------------- -->
+
+    <br>
+    <h2 class="title is-5">Prefix filling</h2>
+    <!-- (<span style="color:pink;">Pink</span>=Input, <span style="color:red;">Red</span>=Generation) -->
+    <p>Generating 50% beginning motion based on the text <span style="color:red;">"a person squats down and stands up."</span> conditioned on the 50% last motion of <span style="color:rgb(230, 155, 169);">"a person pretends to be a dinosuar."</span></p>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <center><p><b>Source Motion</b></p></center>
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/prefix1_source.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "a person squats down and stands up."</b></p></center>
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/prefix1.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <br>
+    <p>Generating 50% beginning motion based on the text <span style="color:red;">"a person is making a high kick with his left leg."</span> conditioned on the 50% last motion of <span style="color:rgb(230, 155, 169);">"a person acts in a shy way while walking."</span></p>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <center><p><b>Source Motion</b></p></center>
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/prefix2_source.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "a person is making a high kick with his left leg."</b></p></center>
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/prefix2.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <!-- ----------------------------------------- -->
+
+    <br>
+    <h2 class="title is-5">Suffix filling</h2>
+    <!-- (<span style="color:pink;">Pink</span>=Input, <span style="color:red;">Red</span>=Generation) -->
+    <p>Generating 50% end motion based on the text <span style="color:red;">"person is walking backwards."</span> conditioned on the 50% beginning motion of <span style="color:rgb(230, 155, 169);">"a person walking forward in slow motion."</span></p>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <center><p><b>Source Motion</b></p></center>
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/suffix1_source.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "person is walking backwards."</b></p></center>
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/suffix1.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <br>
+    <p>Generating 50% end motion based on the text <span style="color:red;">"a person is sitting down on the ground."</span> conditioned on the 50% beginning motion of <span style="color:rgb(230, 155, 169);">"a person appears to be playing the violin."</span></p>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <center><p><b>Source Motion</b></p></center>
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/suffix2_source.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <center><p><b> + "a person is sitting down on the ground."</b></p></center>
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/suffix2.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <!-- ----------------------------------------- -->
+
+
+    <br>
+    <h2 class="title is-5">Free-form Motion Completion</h2>
+    The motion completion task operates without language conditioning. (<span style="color:rgb(230, 155, 169);">Pink</span>=Input, <span style="color:red;">Red</span>=Generation)
+    <br>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/completion1.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/completion2.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column">
+        <div id="video-container">
+          <video id="video" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/completion3.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="content">
+          <video poster="" id="push" autoplay controls muted loop playsinline height="40%">
+              <source src="./assets/videos/edit/completion4.mp4"
+                      type="video/mp4">
+            </video>
+        </div>
+      </div>
+    </div>
+    <!-- ----------------------------------------- -->
+
+
+    
+
+  </div>
+</section>
+
+
 <section class="section">
   <div class="container is-max-desktop">
 
